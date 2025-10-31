@@ -1,21 +1,20 @@
-Food Billing System 🍽️
+# Food Billing System 🍽️
 A comprehensive, mobile-friendly food billing and order management system built with HTML, CSS, and JavaScript. Perfect for small restaurants, food trucks, or cafes looking for a simple yet powerful billing solution.
 
-https://img.shields.io/badge/Version-2.0.0-success https://img.shields.io/badge/License-MIT-blue https://img.shields.io/badge/Browser-Chrome%2520%257C%2520Firefox%2520%257C%2520Safari%2520%257C%2520Edge-informational
+# 🌟 Features
+# 🛍️ Core Functionality
 
-🌟 Features
-🛍️ Core Functionality
-Interactive Menu with categorized food items
+- Interactive Menu with categorized food items
 
-Smart Cart System with quantity controls
+- Smart Cart System with quantity controls
 
-Real-time Calculations with tax support
+- Real-time Calculations with tax support
 
 Order Management with local storage persistence
 
 QR Code Generation for order tracking
 
-📊 Reporting & Analytics
+# 📊 Reporting & Analytics
 Sales Reports with date range filtering
 
 Revenue Statistics dashboard
