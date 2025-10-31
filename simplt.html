@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CHETTINADU GALATA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2b8cff;
+      --primary-dark: #1a75e5;
+      --secondary: #ff6b6b;
+      --success: #4caf50;
+      --warning: #ff9800;
+      --muted: #666;
+      --light: #f7f9fc;
+      --card: #fff;
+      --border: #e0e0e0;
+      --text: #111;
+      --maxw: 1000px;
+      --radius: 12px;
+      --shadow: 0 2px 10px rgba(0,0,0,0.08);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, Arial, sans-serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .app {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      margin: 0;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-info {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 20px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 880px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .panel:hover {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .panel-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Menu Styles */
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
+
+    .item {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: var(--transition);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-color: var(--primary);
+    }
+
+    .item img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .item-content {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .itm-row {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .itm-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .itm-price {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .qty-badge {
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      margin-left: 6px;
+    }
+
+    /* Image Upload Styles */
+    .image-upload {
+      position: relative;
+      width: 100%;
+      height: 120px;
+      border: 2px dashed var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .image-upload:hover {
+      border-color: var(--primary);
+    }
+
+    .image-upload input {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .upload-text {
+      text-align: center;
+      color: var(--muted);
+      padding: 10px;
+    }
+
+    .upload-text i {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .item-image {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    /* Cart Styles */
+    .cart-item {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item .mini {
+      width: 60px;
+      height: 45px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .cart-item-details {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .cart-item-price {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .cart-summary {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .summary-total {
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
+      margin-top: 8px;
+    }
+
+    /* Buttons */
+    button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    button.ghost {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid rgba(43, 140, 255, 0.3);
+    }
+
+    button.ghost:hover {
+      background: rgba(43, 140, 255, 0.1);
+    }
+
+    button.danger {
+      background: var(--secondary);
+    }
+
+    button.danger:hover {
+      background: #ff5252;
+    }
+
+    button.success {
+      background: var(--success);
+    }
+
+    button.success:hover {
+      background: #3d8b40;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .cart-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Reports */
+    .report-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .report-controls label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+
+    input[type="date"] {
+      padding: 8px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: inherit;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: rgba(43, 140, 255, 0.05);
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background: rgba(43, 140, 255, 0.03);
+    }
+
+    /* QR Section */
+    .qr-section {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .qr-container {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-top: 12px;
+    }
+
+    #qrImg {
+      width: 140px;
+      height: 140px;
+      background: white;
+      border-radius: 8px;
+      padding: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .qr-info {
+      flex: 1;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 30px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Empty States */
+    .empty-state {
+      text-align: center;
+      padding: 30px 20px;
+      color: var(--muted);
+    }
+
+    .empty-state i {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      opacity: 0.5;
+    }
+
+    /* Toast Notifications */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--text);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success {
+      background: var(--success);
+    }
+
+    .toast.error {
+      background: var(--secondary);
+    }
+
+    /* Search Bar */
+    .search-container {
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .search-container i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 10px 10px 40px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+    }
+
+    /* Order Stats */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 600px) {
+      .menu {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      }
+      
+      .cart-actions {
+        flex-direction: column;
+      }
+      
+      .cart-actions button {
+        width: 100%;
+      }
+      
+      .qr-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1><i class="fas fa-utensils"></i> CHETTINADU GALATA</h1>
+      <div class="header-info">
+        <i class="fas fa-info-circle"></i> Tap image to add • Data saved in browser
+      </div>
+    </header>
+
+    <div class="grid">
+      <main>
+        <section class="panel">
+          <div class="panel-title">
+            <i class="fas fa-utensils"></i> Menu
+          </div>
+          
+          <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search for food items...">
+          </div>
+
+          <div class="toolbar">
+            <button id="todayBtn" class="ghost"><i class="fas fa-calendar-day"></i> Today</button>
+            <button id="monthBtn" class="ghost"><i class="fas fa-calendar-alt"></i> This Month</button>
+            <button id="yearBtn" class="ghost"><i class="fas fa-calendar"></i> This Year</button>
+            <button id="addItemBtn" class="ghost"><i class="fas fa-plus"></i> Add Item</button>
+          </div>
+
+          <div id="menu" class="menu" style="margin-top:16px"></div>
+        </section>
+
+        <section class="panel" style="margin-top:20px">
+          <div class="panel-title">
+            <i class="fas fa-chart-bar"></i> Reports & Analytics
+          </div>
+          
+          <div class="stats-container" id="statsContainer">
+            <!-- Stats will be populated by JavaScript -->
+          </div>
+
+          <div class="report-controls">
+            <label><i class="fas fa-calendar"></i> From <input type="date" id="fromDate"></label>
+            <label><i class="fas fa-calendar"></i> To <input type="date" id="toDate"></label>
+            <button id="runReport" class="ghost"><i class="fas fa-play"></i> Run Report</button>
+            <button id="exportCsv"><i class="fas fa-file-export"></i> Export CSV</button>
+            <button id="clearOrders" class="ghost danger"><i class="fas fa-trash"></i> Clear All Orders</button>
+          </div>
+
+          <div id="reportArea" style="margin-top:16px">
+            <div class="empty-state">
+              <i class="fas fa-chart-bar"></i>
+              <p>No report data available. Select a date range and click "Run Report".</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <aside>
+        <div class="panel">
+          <div class="panel-title">
+            <i class="fas fa-shopping-cart"></i> Cart
+          </div>
+          
+          <div id="cartList" style="min-height: 120px">
+            <div class="empty-state">
+              <i class="fas fa-shopping-cart"></i>
+              <p>Your cart is empty</p>
+              <small>Tap on food items to add them to your cart</small>
+            </div>
+          </div>
+
+          <div class="cart-summary">
+            <div class="summary-row"><span>Subtotal</span><span id="subtotal">₹0.00</span></div>
+            <div class="summary-row"><span>Tax (5%)</span><span id="tax">₹0.00</span></div>
+            <div class="summary-row summary-total"><span>Total</span><span id="total">₹0.00</span></div>
+          </div>
+
+          <div class="cart-actions">
+            <button id="checkout" class="success"><i class="fas fa-credit-card"></i> Checkout</button>
+            <button id="clearCart" class="ghost"><i class="fas fa-trash"></i> Clear Cart</button>
+          </div>
+
+          <div class="qr-section">
+            <div class="panel-title">
+              <i class="fas fa-qrcode"></i> Last Order QR
+            </div>
+            <div class="qr-container">
+              <canvas id="qrCanvas" width="140" height="140" style="display:none; border-radius:8px; border:1px solid var(--border)"></canvas>
+              <img id="qrImg" alt="QR Code" style="display:none"/>
+              <div id="lastInfo" class="qr-info">
+                <div class="empty-state">
+                  <i class="fas fa-receipt"></i>
+                  <p>No orders yet</p>
+                  <small>Complete a checkout to generate a QR code</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <p><i class="fas fa-info-circle"></i> Save this page as <code>billing.html</code> and open in browser. All data is stored locally in your browser.</p>
+    </footer>
+  </div>
+
+  <!-- Add Item Modal -->
+  <div id="addItemModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center">
+    <div class="panel" style="max-width:400px; width:90%; margin:20px">
+      <div class="panel-title">
+        <i class="fas fa-plus"></i> Add New Item
+      </div>
+      <form id="addItemForm">
+        <div style="margin-bottom:16px">
+          <label style="display:block; margin-bottom:8px; font-weight:600">Item Name</label>
+          <input type="text" id="newItemName" required style="width:100%; padding:10px; border:1px solid var(--border); border-radius:6px">
+        </div>
+        <div style="margin-bottom:16px">
+          <label style="display:block; margin-bottom:8px; font-weight:600">Price (₹)</label>
+          <input type="number" id="newItemPrice" required min="1" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:6px">
+        </div>
+        <div style="margin-bottom:16px">
+          <label style="display:block; margin-bottom:8px; font-weight:600">Category</label>
+          <select id="newItemCategory" required style="width:100%; padding:10px; border:1px solid var(--border); border-radius:6px">
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Beverages">Beverages</option>
+          </select>
+        </div>
+        <div style="margin-bottom:16px">
+          <label style="display:block; margin-bottom:8px; font-weight:600">Item Image</label>
+          <div class="image-upload">
+            <input type="file" id="newItemImage" accept="image/*">
+            <div class="upload-text">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <div>Click to upload image</div>
+              <small>JPG, PNG, GIF (Max 2MB)</small>
+            </div>
+          </div>
+          <img id="imagePreview" style="display:none; width:100%; height:120px; object-fit:cover; border-radius:8px; margin-top:8px">
+        </div>
+        <div style="display:flex; gap:10px; margin-top:20px">
+          <button type="submit" class="success" style="flex:1"><i class="fas fa-save"></i> Save Item</button>
+          <button type="button" id="cancelAddItem" class="ghost"><i class="fas fa-times"></i> Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    // Enhanced food items with REAL images from external sources
+    const ITEMS = [
+      {id:'idly', name:'Idly', price:30, img:'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop', category: 'Breakfast'},
+      {id:'vada', name:'Vada', price:25, img:'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&h=300&fit=crop', category: 'Breakfast'},
+      {id:'dosa', name:'Dosa', price:50, img:'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=400&h=300&fit=crop', category: 'Breakfast'},
+      {id:'poori', name:'Poori', price:40, img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop', category: 'Breakfast'},
+      {id:'briyani', name:'Briyani', price:120, img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/a7/7a/8b/igshid-19zvpa7cmunyf.jpg?w=900&h=500&s=1', category: 'Lunch'},
+      {id:'chicken65', name:'Chicken 65', price:140, img:'https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400&h=300&fit=crop', category: 'Lunch'},
+      {id:'paneer', name:'Paneer Masala', price:130, img:'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop', category: 'Lunch'},
+      {id:'friedrice', name:'Fried Rice', price:90, img:'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&h=300&fit=crop', category: 'Dinner'},
+      {id:'chappathi', name:'Chappathi', price:20, img:'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=300&fit=crop', category: 'Dinner'},
+      {id:'gulab', name:'Gulab Jamun', price:30, img:'https://images.unsplash.com/photo-1560472355-536de3962603?w=400&h=300&fit=crop', category: 'Dessert'}
+    ];
+
+    const TAX_RATE = 0.05;
+    const KEY = 'billing_orders_v2';
+    const ITEMS_KEY = 'billing_items_v2';
+
+    // Toast notification system
+    function showToast(message, type = 'info', duration = 3000) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.className = 'toast';
+      
+      if (type === 'success') {
+        toast.classList.add('success');
+        toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+      } else if (type === 'error') {
+        toast.classList.add('error');
+        toast.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+      } else {
+        toast.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
+      }
+      
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, duration);
+    }
+
+    // Simple QR Code Generator (Canvas-based)
+    function generateQRCode(text, canvasId) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      
+      // Clear canvas
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Simple QR-like pattern (for demonstration)
+      // In a real app, you'd use a proper QR library like qrcode.js
+      ctx.fillStyle = 'black';
+      const size = 10;
+      const data = text;
+      
+      // Create a simple pattern based on the text
+      for (let i = 0; i < data.length; i++) {
+        const x = (i * 7) % (canvas.width - size);
+        const y = Math.floor((i * 7) / (canvas.width - size)) * size;
+        
+        if (y < canvas.height - size) {
+          // Create a pattern based on character code
+          if (data.charCodeAt(i) % 2 === 0) {
+            ctx.fillRect(x, y, size, size);
+          }
+        }
+      }
+      
+      // Add border
+      ctx.strokeStyle = '#333';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(0, 0, canvas.width, canvas.height);
+      
+      return canvas.toDataURL();
+    }
+
+    // UI rendering
+    const menuEl = document.getElementById('menu');
+    const cartList = document.getElementById('cartList');
+    const subtotalEl = document.getElementById('subtotal');
+    const taxEl = document.getElementById('tax');
+    const totalEl = document.getElementById('total');
+    const qrImg = document.getElementById('qrImg');
+    const qrCanvas = document.getElementById('qrCanvas');
+    const lastInfo = document.getElementById('lastInfo');
+    const searchInput = document.getElementById('searchInput');
+    const statsContainer = document.getElementById('statsContainer');
+
+    let cart = {};
+    let items = [];
+
+    function loadItems() {
+      const savedItems = localStorage.getItem(ITEMS_KEY);
+      if (savedItems) {
+        items = JSON.parse(savedItems);
+      } else {
+        items = [...ITEMS];
+        saveItems();
+      }
+    }
+
+    function saveItems() {
+      localStorage.setItem(ITEMS_KEY, JSON.stringify(items));
+    }
+
+    function renderMenu(itemsToRender = items) {
+      menuEl.innerHTML = '';
+      
+      if (itemsToRender.length === 0) {
+        menuEl.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 30px; color: var(--muted);">
+            <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 10px;"></i>
+            <p>No items found matching your search</p>
+            <button id="addFirstItem" class="ghost" style="margin-top: 10px;">
+              <i class="fas fa-plus"></i> Add Your First Item
+            </button>
+          </div>
+        `;
+        document.getElementById('addFirstItem').addEventListener('click', showAddItemModal);
+        return;
+      }
+      
+      // Group items by category
+      const categories = {};
+      itemsToRender.forEach(item => {
+        if (!categories[item.category]) {
+          categories[item.category] = [];
+        }
+        categories[item.category].push(item);
+      });
+      
+      // Render items by category
+      Object.keys(categories).forEach(category => {
+        const categoryTitle = document.createElement('div');
+        categoryTitle.style.gridColumn = '1 / -1';
+        categoryTitle.style.fontWeight = '600';
+        categoryTitle.style.marginTop = '16px';
+        categoryTitle.style.marginBottom = '8px';
+        categoryTitle.style.color = 'var(--primary)';
+        categoryTitle.textContent = category;
+        menuEl.appendChild(categoryTitle);
+        
+        categories[category].forEach(it => {
+          const div = document.createElement('div'); 
+          div.className = 'item';
+          div.innerHTML = `
+            <img src='${it.img}' alt='${it.name}' data-id='${it.id}' 
+                 onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\' rx=\'12\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'Arial\' font-size=\'28\' fill=\'%23222\'>${it.name}</text></svg>'" />
+            <div class='item-content'>
+              <div class='itm-row'>
+                <div>
+                  <div class='itm-name'>${it.name}</div>
+                  <div class='itm-price'>₹${it.price}</div>
+                </div>
+                <div class='qty-badge' id='badge-${it.id}'>${cart[it.id] || 0}</div>
+              </div>
+            </div>`;
+          menuEl.appendChild(div);
+          div.addEventListener('click', () => addToCart(it.id));
+        });
+      });
+    }
+
+    function addToCart(id) {
+      if (!cart[id]) cart[id] = 0; 
+      cart[id]++;
+      updateBadges(); 
+      renderCart();
+      showToast(`${items.find(item => item.id === id).name} added to cart`, 'success');
+    }
+
+    function removeFromCart(id) {
+      if (!cart[id]) return; 
+      cart[id]--; 
+      if (cart[id] <= 0) delete cart[id]; 
+      updateBadges(); 
+      renderCart();
+    }
+
+    function updateBadges() {
+      items.forEach(it => {
+        const b = document.getElementById('badge-' + it.id);
+        if (b) b.textContent = cart[it.id] || 0;
+      });
+    }
+
+    function renderCart() {
+      if (Object.keys(cart).length === 0) {
+        cartList.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-shopping-cart"></i>
+            <p>Your cart is empty</p>
+            <small>Tap on food items to add them to your cart</small>
+          </div>
+        `;
+        
+        subtotalEl.textContent = '₹0.00';
+        taxEl.textContent = '₹0.00';
+        totalEl.textContent = '₹0.00';
+        return;
+      }
+      
+      cartList.innerHTML = '';
+      let sub = 0;
+      
+      Object.keys(cart).forEach(id => {
+        const item = items.find(i => i.id === id);
+        const qty = cart[id];
+        const lineTotal = item.price * qty; 
+        sub += lineTotal;
+        
+        const row = document.createElement('div'); 
+        row.className = 'cart-item';
+        row.innerHTML = `
+          <img src='${item.img}' class='mini' alt='' 
+               onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'75\'><rect width=\'100%\' height=\'100%\' fill=\'%23f1f5f9\' rx=\'8\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'Arial\' font-size=\'12\' fill=\'%23222\'>${item.name}</text></svg>'">
+          <div class='cart-item-details'>
+            <div class='cart-item-name'>${item.name}</div>
+            <div class='cart-item-price'>₹${item.price} × ${qty} = ₹${lineTotal}</div>
+            <div class='cart-item-controls'>
+              <button class='ghost' data-action='dec' data-id='${id}'><i class="fas fa-minus"></i></button>
+              <span>${qty}</span>
+              <button data-action='inc' data-id='${id}'><i class="fas fa-plus"></i></button>
+            </div>
+          </div>`;
+        cartList.appendChild(row);
+      });
+      
+      const tax = +(sub * TAX_RATE).toFixed(2);
+      const total = +(sub + tax).toFixed(2);
+      
+      subtotalEl.textContent = `₹${sub.toFixed(2)}`;
+      taxEl.textContent = `₹${tax.toFixed(2)}`;
+      totalEl.textContent = `₹${total.toFixed(2)}`;
+    }
+
+    // Cart buttons
+    document.getElementById('clearCart').addEventListener('click', () => {
+      cart = {}; 
+      updateBadges(); 
+      renderCart();
+      showToast('Cart cleared', 'info');
+    });
+    
+    document.getElementById('checkout').addEventListener('click', checkout);
+
+    // handle inc/dec in cart list
+    cartList.addEventListener('click', (e) => {
+      const btn = e.target.closest('button'); 
+      if (!btn) return;
+      const id = btn.dataset.id; 
+      const action = btn.dataset.action;
+      if (action === 'inc') addToCart(id); 
+      else if (action === 'dec') removeFromCart(id);
+    });
+
+    function checkout() {
+      if (Object.keys(cart).length === 0) {
+        showToast('Cart is empty', 'error');
+        return;
+      }
+      
+      const now = new Date();
+      const order = {
+        id: 'ORD-' + now.getTime(), 
+        ts: now.toISOString(), 
+        items: [], 
+        subtotal: 0
+      };
+      
+      Object.keys(cart).forEach(id => {
+        const it = items.find(x => x.id === id);
+        order.items.push({
+          id: it.id,
+          name: it.name,
+          qty: cart[id],
+          price: it.price
+        });
+        order.subtotal += it.price * cart[id];
+      });
+      
+      order.tax = +(order.subtotal * TAX_RATE).toFixed(2);
+      order.total = +(order.subtotal + order.tax).toFixed(2);
+
+      // save to localStorage
+      const all = JSON.parse(localStorage.getItem(KEY) || '[]');
+      all.push(order); 
+      localStorage.setItem(KEY, JSON.stringify(all));
+
+      // Generate QR code
+      const qrData = JSON.stringify({
+        id: order.id, 
+        total: order.total, 
+        ts: order.ts,
+        items: order.items
+      });
+      
+      // Use Google Charts API for QR code (fallback)
+      const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(qrData)}`;
+      
+      // Try to generate with canvas first, then fallback to Google API
+      try {
+        const qrDataUrl = generateQRCode(qrData, 'qrCanvas');
+        qrCanvas.style.display = 'block';
+        qrImg.style.display = 'none';
+      } catch (e) {
+        // Fallback to Google Charts API
+        qrImg.src = qrUrl;
+        qrImg.style.display = 'block';
+        qrCanvas.style.display = 'none';
+        console.log('Using Google Charts QR API as fallback');
+      }
+      
+      lastInfo.innerHTML = `
+        <div>
+          <p><strong>${order.id}</strong></p>
+          <p>₹${order.total} • ${new Date(order.ts).toLocaleString()}</p>
+          <p style="margin-top: 8px; font-size: 0.8rem;">Scan to view order details</p>
+        </div>
+      `;
+
+      // clear cart
+      cart = {}; 
+      updateBadges(); 
+      renderCart();
+      updateStats();
+      showToast(`Order ${order.id} completed successfully!`, 'success');
+    }
+
+    // Add Item Modal Functionality
+    function showAddItemModal() {
+      document.getElementById('addItemModal').style.display = 'flex';
+    }
+
+    function hideAddItemModal() {
+      document.getElementById('addItemModal').style.display = 'none';
+      document.getElementById('addItemForm').reset();
+      document.getElementById('imagePreview').style.display = 'none';
+    }
+
+    // Image preview for upload
+    document.getElementById('newItemImage').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const preview = document.getElementById('imagePreview');
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Add new item functionality
+    document.getElementById('addItemForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('newItemName').value;
+      const price = parseInt(document.getElementById('newItemPrice').value);
+      const category = document.getElementById('newItemCategory').value;
+      const imageFile = document.getElementById('newItemImage').files[0];
+      
+      if (!name || !price) {
+        showToast('Please fill all required fields', 'error');
+        return;
+      }
+      
+      const newItem = {
+        id: name.toLowerCase().replace(/\s+/g, '_'),
+        name: name,
+        price: price,
+        category: category,
+        img: ''
+      };
+      
+      // Handle image
+      if (imageFile) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          newItem.img = e.target.result;
+          saveNewItem(newItem);
+        };
+        reader.readAsDataURL(imageFile);
+      } else {
+        // Use placeholder
+        newItem.img = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect width='100%' height='100%' fill='%23f1f5f9' rx='12'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='28' fill='%23222'>${name}</text></svg>`;
+        saveNewItem(newItem);
+      }
+    });
+    
+    function saveNewItem(item) {
+      items.push(item);
+      saveItems();
+      renderMenu();
+      hideAddItemModal();
+      showToast(`${item.name} added to menu!`, 'success');
+    }
+
+    // Reports
+    document.getElementById('runReport').addEventListener('click', runReport);
+    document.getElementById('exportCsv').addEventListener('click', exportCsv);
+    document.getElementById('clearOrders').addEventListener('click', () => {
+      if (confirm('Are you sure you want to clear all saved orders? This action cannot be undone.')) {
+        localStorage.removeItem(KEY); 
+        renderReport([]); 
+        updateStats();
+        loadLast();
+        showToast('All orders cleared', 'info');
+      }
+    });
+
+    document.getElementById('todayBtn').addEventListener('click', () => { presetRange('today'); });
+    document.getElementById('monthBtn').addEventListener('click', () => { presetRange('month'); });
+    document.getElementById('yearBtn').addEventListener('click', () => { presetRange('year'); });
+    document.getElementById('addItemBtn').addEventListener('click', showAddItemModal);
+    document.getElementById('cancelAddItem').addEventListener('click', hideAddItemModal);
+
+    function presetRange(scope) {
+      const to = new Date(); 
+      let from = new Date();
+      
+      if (scope === 'today') {
+        from.setHours(0, 0, 0, 0);
+      } else if (scope === 'month') {
+        from.setDate(1); 
+        from.setHours(0, 0, 0, 0);
+      } else if (scope === 'year') {
+        from.setMonth(0, 1); 
+        from.setHours(0, 0, 0, 0);
+      }
+      
+      document.getElementById('fromDate').value = from.toISOString().slice(0, 10);
+      document.getElementById('toDate').value = to.toISOString().slice(0, 10);
+      runReport();
+    }
+
+    function runReport() {
+      const from = document.getElementById('fromDate').value ? 
+        new Date(document.getElementById('fromDate').value + 'T00:00:00') : null;
+      const to = document.getElementById('toDate').value ? 
+        new Date(document.getElementById('toDate').value + 'T23:59:59') : null;
+      
+      const all = JSON.parse(localStorage.getItem(KEY) || '[]');
+      const filtered = all.filter(o => {
+        const t = new Date(o.ts);
+        if (from && t < from) return false; 
+        if (to && t > to) return false; 
+        return true;
+      });
+      
+      renderReport(filtered);
+    }
+
+    function renderReport(orders) {
+      const area = document.getElementById('reportArea');
+      
+      if (!orders || orders.length === 0) {
+        area.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-chart-bar"></i>
+            <p>No orders found for this date range</p>
+          </div>
+        `;
+        return;
+      }
+      
+      // summary
+      const totalOrders = orders.length;
+      const gross = orders.reduce((s, o) => s + (o.total || 0), 0);
+      const avgOrder = gross / totalOrders;
+      
+      let html = `
+        <div style="margin-bottom: 16px;">
+          <div class="stats-container">
+            <div class="stat-card">
+              <div class="stat-value">${totalOrders}</div>
+              <div class="stat-label">Total Orders</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">₹${gross.toFixed(2)}</div>
+              <div class="stat-label">Total Revenue</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">₹${avgOrder.toFixed(2)}</div>
+              <div class="stat-label">Avg. Order Value</div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      html += `<table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Date & Time</th>
+            <th>Items</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>`;
+      
+      orders.forEach(o => {
+        html += `
+          <tr>
+            <td>${o.id}</td>
+            <td>${new Date(o.ts).toLocaleString()}</td>
+            <td>${o.items.map(i => i.name + ' x' + i.qty).join(', ')}</td>
+            <td>₹${(o.total || 0).toFixed(2)}</td>
+          </tr>`;
+      });
+      
+      html += `</tbody></table>`;
+      area.innerHTML = html;
+    }
+
+    function exportCsv() {
+      const from = document.getElementById('fromDate').value ? 
+        new Date(document.getElementById('fromDate').value + 'T00:00:00') : null;
+      const to = document.getElementById('toDate').value ? 
+        new Date(document.getElementById('toDate').value + 'T23:59:59') : null;
+      
+      const all = JSON.parse(localStorage.getItem(KEY) || '[]');
+      const filtered = all.filter(o => {
+        const t = new Date(o.ts);
+        if (from && t < from) return false; 
+        if (to && t > to) return false; 
+        return true;
+      });
+      
+      if (filtered.length === 0) {
+        showToast('No orders to export', 'error');
+        return;
+      }
+      
+      let csv = 'Order ID,Date,Time,Items,Subtotal,Tax,Total\n';
+      filtered.forEach(o => {
+        const date = new Date(o.ts);
+        const dateStr = date.toISOString().slice(0, 10);
+        const timeStr = date.toTimeString().slice(0, 8);
+        const items = '"' + o.items.map(i => i.name + ' x' + i.qty).join('; ') + '"';
+        csv += `${o.id},${dateStr},${timeStr},${items},${o.subtotal},${o.tax},${o.total}\n`;
+      });
+      
+      const blob = new Blob([csv], {type: 'text/csv'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); 
+      a.href = url; 
+      a.download = 'orders_' + new Date().toISOString().slice(0, 10) + '.csv'; 
+      a.click(); 
+      URL.revokeObjectURL(url);
+      showToast('CSV exported successfully', 'success');
+    }
+
+    // Load last QR if any
+    function loadLast() {
+      const all = JSON.parse(localStorage.getItem(KEY) || '[]');
+      if (all.length === 0) return;
+      
+      const last = all[all.length - 1];
+      const qrData = JSON.stringify({
+        id: last.id,
+        total: last.total,
+        ts: last.ts,
+        items: last.items
+      });
+      
+      // Try to generate with canvas first, then fallback to Google API
+      try {
+        const qrDataUrl = generateQRCode(qrData, 'qrCanvas');
+        qrCanvas.style.display = 'block';
+        qrImg.style.display = 'none';
+      } catch (e) {
+        // Fallback to Google Charts API
+        const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(qrData)}`;
+        qrImg.src = qrUrl;
+        qrImg.style.display = 'block';
+        qrCanvas.style.display = 'none';
+      }
+      
+      lastInfo.innerHTML = `
+        <div>
+          <p><strong>${last.id}</strong></p>
+          <p>₹${last.total} • ${new Date(last.ts).toLocaleString()}</p>
+          <p style="margin-top: 8px; font-size: 0.8rem;">Scan to view order details</p>
+        </div>
+      `;
+    }
+
+    // Update stats
+    function updateStats() {
+      const all = JSON.parse(localStorage.getItem(KEY) || '[]');
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      const todayOrders = all.filter(o => {
+        const orderDate = new Date(o.ts);
+        return orderDate >= today;
+      });
+      
+      const todayRevenue = todayOrders.reduce((sum, order) => sum + order.total, 0);
+      const totalRevenue = all.reduce((sum, order) => sum + order.total, 0);
+      
+      statsContainer.innerHTML = `
+        <div class="stat-card">
+          <div class="stat-value">${all.length}</div>
+          <div class="stat-label">Total Orders</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">₹${totalRevenue.toFixed(2)}</div>
+          <div class="stat-label">Total Revenue</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${todayOrders.length}</div>
+          <div class="stat-label">Today's Orders</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">₹${todayRevenue.toFixed(2)}</div>
+          <div class="stat-label">Today's Revenue</div>
+        </div>
+      `;
+    }
+
+    // Search functionality
+    searchInput.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      if (searchTerm === '') {
+        renderMenu();
+        return;
+      }
+      
+      const filteredItems = items.filter(item => 
+        item.name.toLowerCase().includes(searchTerm) || 
+        item.category.toLowerCase().includes(searchTerm)
+      );
+      
+      renderMenu(filteredItems);
+    });
+
+    // Initialize the app
+    function init() {
+      loadItems();
+      renderMenu(); 
+      renderCart(); 
+      loadLast();
+      updateStats();
+      
+      // Set default date range to today
+      const today = new Date();
+      document.getElementById('fromDate').value = today.toISOString().slice(0, 10);
+      document.getElementById('toDate').value = today.toISOString().slice(0, 10);
+      
+      showToast('Food Billing System loaded successfully!', 'success');
+    }
+
+    // Start the application
+    init();
+  </script>
+</body>
+</html>
